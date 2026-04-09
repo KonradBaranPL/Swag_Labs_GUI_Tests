@@ -18,11 +18,14 @@ def test_login_button_is_visible(page):
 def test_username_field_is_empty(page):
     """Verifies that username field is empty after login page has been loaded"""
     page.goto("https://www.saucedemo.com/")
-    pass
+    expect(page.locator("[data-test=\"username\"]")).to_have_value("")
 
 
-def test_swag_labs_logo_is_visible():
-    pass
+def test_swag_labs_logo_is_visible(page):
+    """Verifies that "Swag Labs" logo is visible on the login page"""
+    page.goto("https://www.saucedemo.com/")
+    expect(page.get_by_text("Swag Labs")).to_be_visible()
+    
 
 
 # $ pytest tests\test_pierwszy.py --headed
