@@ -100,6 +100,44 @@ def test_login_without_password_fails(page):
     expect(error).to_contain_text("Password is required")
 
 
+def test_login_with_fake_username_fails(page):
+    """Verifies that login with incorrect username fails
+    and the page shows error message
+    """
+    # Arrange
+    page.goto(MAIN_PAGE_URL)
+
+    # Act
+    page.locator("[data-test=\"username\"]").fill("example_incorrect_user")
+    page.locator("[data-test=\"password\"]").fill("secret_sauce")
+    page.locator("[data-test=\"login-button\"]").click()
+
+    # Assert
+    expect(page).to_have_url("https://www.saucedemo.com/")
+    error = page.locator("[data-test=\"error\"]")
+    expect(error).to_be_visible()
+    expect(error).to_contain_text("Username and password do not match any user in this service")
+
+
+def test_login_with_fake_password_fails(page):
+    """Verifies that login with incorrect password fails
+    and the page shows error message
+    """
+    # Arrange
+    page.goto(MAIN_PAGE_URL)
+
+    # Act
+    page.locator("[data-test=\"username\"]").fill("standard_user")
+    page.locator("[data-test=\"password\"]").fill("example_incorrect_password")
+    page.locator("[data-test=\"login-button\"]").click()
+
+    # Assert
+    expect(page).to_have_url("https://www.saucedemo.com/")
+    error = page.locator("[data-test=\"error\"]")
+    expect(error).to_be_visible()
+    expect(error).to_contain_text("Username and password do not match any user in this service")
+
+
 
 
 
