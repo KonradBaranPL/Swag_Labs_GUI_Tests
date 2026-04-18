@@ -3,6 +3,8 @@ import os
 
 class Config:
     BASE_URL = os.getenv("BASE_URL", "https://www.saucedemo.com/")
+    PRODUCTS_URL = os.getenv("PRODUCTS_URL", "https://www.saucedemo.com/inventory.html")
+    CART_URL = os.getenv("CART_URL", "https://www.saucedemo.com/cart.html")
 
     DEFAULT_TIMEOUT = int(os.getenv("TIMEOUT", "10000"))
     NAVIGATION_TIMEOUT = int(os.getenv("NAV_TIMEOUT", "30000"))
