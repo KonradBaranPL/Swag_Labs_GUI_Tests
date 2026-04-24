@@ -1,9 +1,21 @@
 """missing docstring"""
 
+from utils.config import Config
+from pages.login_page import LoginPage
 from playwright.sync_api import Page, expect
 
 MAIN_PAGE_URL = "https://www.saucedemo.com/"
 
+def test_login2(page, login_page):
+    # Arrange
+    login_page.navigate()
+
+    # Act
+    login_page.login(username="standard_user", password= "secret_sauce")
+
+    # Assert
+    expect(page).to_have_url(Config.PRODUCTS_URL)
+    
 
 def test_successful_login(page):
     """Verifies that user logs in with valid credentials
