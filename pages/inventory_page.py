@@ -39,20 +39,23 @@ class InventoryPage(BasePage):
         return [float(price.replace("$", "")) for price in texts]
 
     def get_cart_count(self) -> int:
-        if self.cart_badge.is_
+        if self.cart_badge.is_visible():
+            return int(self.cart_badge.text_content())
 
 # metody wykonujące akcje
     def add_product_by_index(self, index: int):
-        pass
+        self.add_buttons.nth(index).click()
 
-    def add_product_by_name(self):
-        pass
+    def add_product_by_name(self, product_name: str):
+        product = product_name.lower().replace(" ", "-")
+        self.page.locator(f"[data-test=\"add-to-cart-{product}\"]")
 
-    def sort_by(self):
-        pass
+    def sort_by(self, value: str):
+        """Possible values: 'az'. 'za', 'lohi, 'hilo"""
+        self.product_sort_dropdown.select_option(value)
 
     def go_to_cart(self):
-        pass
+        self.cart_link.click()
 
     def open_menu(self):
-        pass
+        self.burger_menu.click()
