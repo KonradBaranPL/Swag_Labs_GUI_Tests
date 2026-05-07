@@ -44,7 +44,6 @@ def test_login_button_is_visible(login_page: LoginPage):
     expect(login_page.login_button).to_be_visible()
 
 
-
 def test_username_field_is_empty(login_page: LoginPage):
     """Verifies that username field is empty when login page has been loaded"""
     # Act
@@ -77,7 +76,11 @@ def test_successful_login(page: Page, login_page: LoginPage, standard_user: User
     expect(page).to_have_url(Config.PRODUCTS_URL)
 
 
-def test_login_with_blocked_user_fails(page: Page, login_page: LoginPage, locked_out_user: User):
+def test_login_with_blocked_user_fails(
+        page: Page,
+        login_page: LoginPage,
+        locked_out_user: User,
+):
     """Verifies that blocked user cannot log in and the page shows error message"""
     # Arrange
     login_page.navigate()
@@ -91,7 +94,11 @@ def test_login_with_blocked_user_fails(page: Page, login_page: LoginPage, locked
     expect(login_page.error_message).to_contain_text("this user has been locked out")
 
 
-def test_login_without_username_fails(page: Page, login_page: LoginPage, standard_user: User):
+def test_login_without_username_fails(
+        page: Page,
+        login_page: LoginPage,
+        standard_user: User,
+):
     """Verifies that user cannot login if username field is empty"""
     # Arrange
     login_page.navigate()
@@ -106,7 +113,11 @@ def test_login_without_username_fails(page: Page, login_page: LoginPage, standar
     expect(login_page.error_message).to_contain_text("Username is required")
 
 
-def test_login_without_password_fails(page: Page, login_page: LoginPage, standard_user: User):
+def test_login_without_password_fails(
+        page: Page,
+        login_page: LoginPage,
+        standard_user: User,
+):
     """Verifies that user cannot login if password field is empty"""
     # Arrange
     login_page.navigate()
@@ -125,7 +136,7 @@ def test_login_with_incorrect_username_fails(
         page: Page,
         login_page: LoginPage,
         standard_user: User,
-    ):
+):
     """Verifies that login with incorrect username fails"""
     # Arrange
     login_page.navigate()
@@ -143,7 +154,11 @@ def test_login_with_incorrect_username_fails(
     )
 
 
-def test_login_with_incorrect_password_fails(page: Page, login_page: LoginPage, standard_user: User):
+def test_login_with_incorrect_password_fails(
+        page: Page,
+        login_page: LoginPage,
+        standard_user: User,
+):
     """Verifies that login with incorrect password fails"""
     # Arrange
     login_page.navigate()
