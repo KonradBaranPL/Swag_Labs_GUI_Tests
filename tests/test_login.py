@@ -42,7 +42,8 @@ def test_login_button_is_visible(login_page: LoginPage):
 
     # Assert
     expect(login_page.login_button).to_be_visible()
-    
+
+
 
 def test_username_field_is_empty(login_page: LoginPage):
     """Verifies that username field is empty when login page has been loaded"""
@@ -60,7 +61,7 @@ def test_password_input_is_empty(login_page: LoginPage):
 
     # Assert
     expect(login_page.password_input).to_have_value("")
-    
+
 
 def test_successful_login(page: Page, login_page: LoginPage, standard_user: User):
     """Verifies that user logs in with valid credentials
@@ -120,7 +121,11 @@ def test_login_without_password_fails(page: Page, login_page: LoginPage, standar
     expect(login_page.error_message).to_contain_text("Password is required")
 
 
-def test_login_with_incorrect_username_fails(page: Page, login_page: LoginPage, standard_user: User):
+def test_login_with_incorrect_username_fails(
+        page: Page,
+        login_page: LoginPage,
+        standard_user: User,
+    ):
     """Verifies that login with incorrect username fails"""
     # Arrange
     login_page.navigate()
@@ -151,6 +156,6 @@ def test_login_with_incorrect_password_fails(page: Page, login_page: LoginPage, 
     # Assert
     expect(page).to_have_url(Config.BASE_URL)
     expect(login_page.error_message).to_be_visible()
-    expect(login_page.error_message).to_conttain_text(
+    expect(login_page.error_message).to_contain_text(
         "Username and password do not match any user in this service"
     )
