@@ -1,5 +1,3 @@
-"""missing docstring"""
-
 from playwright.sync_api import Page, expect
 
 
@@ -25,7 +23,3 @@ def test_swag_labs_logo_is_visible(page):
     """Verifies that "Swag Labs" logo is visible on the login page"""
     page.goto("https://www.saucedemo.com/")
     expect(page.get_by_text("Swag Labs")).to_be_visible()
-    
-
-
-# $ pytest tests\test_pierwszy.py --headed

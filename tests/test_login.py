@@ -10,10 +10,11 @@ Covers:
 Uses Playwright with Page Object Model and predefined user fixtures.
 """
 
-from utils.config import Config
 from playwright.sync_api import Page, expect
-from pages.login_page import LoginPage
+
 from data.users import User
+from pages.login_page import LoginPage
+from utils.config import Config
 
 
 def test_login_page_has_loaded(page: Page, login_page: LoginPage):

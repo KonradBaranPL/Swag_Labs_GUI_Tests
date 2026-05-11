@@ -5,9 +5,10 @@ Provides locators for all interactive elements on the login page
 and methods to navigate, perform login, and handle error messages.
 """
 
+from playwright.sync_api import Page
+
 from pages.base_page import BasePage
 from utils.config import Config
-from playwright.sync_api import Page
 
 
 class LoginPage(BasePage):
@@ -26,13 +27,13 @@ class LoginPage(BasePage):
         """Opens login page in the browser."""
         self.page.goto(Config.BASE_URL)
 
-    def login(self, username, password):
+    def login(self, username: str, password: str):
         """Execute login with given username and password."""
         self.username_input.fill(username)
         self.password_input.fill(password)
         self.login_button.click()
 
-    def get_error_text(self):
+    def get_error_text(self) -> str:
         """Returns text of error message displayed after failed login."""
         return self.error_message.text_content()
 
