@@ -9,7 +9,7 @@ The framework automates end-to-end tests for the demo e-commerce application:
 * [https://www.saucedemo.com/](https://www.saucedemo.com/)
 
 The main goal of the project is to learn professional test automation practices and build a maintainable automation framework using modern tools and design patterns.
-
+ 
 ---
 
 ## Tech Stack
