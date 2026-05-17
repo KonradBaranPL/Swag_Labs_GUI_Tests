@@ -1,132 +1,126 @@
-# Swag Labs UI Test Automation Framework
+# Swag Labs GUI Tests
 
-## Project Overview
+## Table of Contents
 
-This project is a UI test automation framework built with Python, Pytest, and Playwright.
+- [Project Description](#project-description)
+- [Tech Stack](#tech-stack)
+- [Getting Started Locally](#getting-started-locally)
+- [Running Tests](#running-tests)
+- [Project Status](#project-status)
 
-The framework automates end-to-end tests for the demo e-commerce application:
+---
 
-* [https://www.saucedemo.com/](https://www.saucedemo.com/)
+## Project Description
 
-The main goal of the project is to learn professional test automation practices and build a maintainable automation framework using modern tools and design patterns.
- 
+Project Description
+An automated end-to-end UI test suite for Swag Labs — a demo e-commerce application built specifically for testing practice. 
+
+The project is built around the Page Object Model pattern, separating locators and user interactions from test logic. Test data is managed through the Factory pattern, providing predefined user accounts with known behaviors. Shared state and setup are handled via pytest fixtures, keeping individual tests focused and independent. Environment-specific values such as URLs and timeouts are centralized in a dedicated configuration layer, making the suite easy to run across different environments.
+
 ---
 
 ## Tech Stack
 
-* Python
-* Pytest
-* Playwright
-* pytest-playwright
-* Page Object Model (POM)
-* Git & GitHub
+- **Python** 3.8+
+- **pytest** 8.4.2 – test framework
+- **Playwright** 1.58.0 – browser automation
+- **pytest-playwright** 0.7.2 – Playwright integration for pytest
+- **pytest-html** 4.2.0 – HTML test reporting
+- **pytest-cov** – test coverage reporting
 
 ---
 
-## Features
+## Getting Started Locally
 
-* UI and end-to-end testing
-* Positive and negative test scenarios
-* Page Object Model architecture
-* Reusable fixtures and test data
-* Configurable environment settings
-* Screenshot capturing on test failure
-* Smoke and regression test structure
-
----
-
-## Project Structure
-
-```text
-swag-labs-tests/
-│
-├── tests/
-├── pages/
-├── data/
-├── utils/
-├── conftest.py
-├── pytest.ini
-├── requirements.txt
-└── README.md
-```
-
----
-
-## Installation
-
-Clone the repository:
+**Clone the repository:**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/swag-labs-tests.git
+git clone https://github.com/KonradBaranPL/Swag_Labs_GUI_Tests.git
+cd Swag_Labs_GUI_Tests
 ```
 
-Create virtual environment:
+**Create and activate a virtual environment:**
 
 ```bash
 python -m venv venv
+
+# Linux/macOS
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
 ```
 
-Install dependencies:
+**Install dependencies:**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Install Playwright browsers:
+**Install Playwright browsers:**
 
 ```bash
 playwright install
+```
+
+**Configure environment (optional):**
+
+The base URL and timeouts default to production values. To override them, set environment variables before running tests:
+
+```bash
+# Linux/macOS
+export BASE_URL=https://www.saucedemo.com/
+export TIMEOUT=10000
+
+# Windows
+set BASE_URL=https://www.saucedemo.com/
 ```
 
 ---
 
 ## Running Tests
 
-Run all tests:
-
 ```bash
+# Run all tests
 pytest
-```
 
-Run tests in headed mode:
-
-```bash
+# Run with visible browser
 pytest --headed
+
+# Run a specific test file
+pytest tests/test_login.py
+pytest tests/test_inventory_page.py
+
+# Run with verbose output
+pytest -v
+
+# Generate an HTML report
+pytest --html=report.html
 ```
-
-Run smoke tests:
-
-```bash
-pytest -m smoke
-```
-
----
-
-## Project Goals
-
-This project was created to practice:
-
-* Playwright with Python,
-* UI automation,
-* scalable test architecture,
-* clean and maintainable test code,
-* real-world QA automation practices.
 
 ---
 
 ## Project Status
 
-Project is currently under active development.
+### ✅ Done
 
-Planned improvements:
+- Page Object Model architecture with a shared `BasePage` class
+- `LoginPage` with full locator coverage and login/error methods
+- `InventoryPage` with locators for products, cart, sorting, footer links, and burger menu
+- `User` dataclass and `UserFactory` covering all six Swag Labs user types (standard, locked out, problem, performance glitch, error, visual)
+- `conftest.py` with shared fixtures: timeout setup, user fixtures, `login_page`, `authenticated_page`
+- Login tests — page load checks, positive login flow, and negative scenarios (blocked user, missing username, missing password, incorrect credentials)
+- Inventory tests — page title, product count, and footer social link redirects (Facebook, X, LinkedIn)
+- Environment-based configuration via `utils/config.py`
+- PEP 8 compliance, type annotations, and docstrings throughout
 
-* CI/CD integration,
-* API testing,
-* reporting tools,
-* parallel execution.
+### 🔧 Planned
 
----
-
-## License
-
-This project is created for educational and portfolio purposes.
+- `CartPage` implementation and cart tests (add/remove items, cart state persistence)
+- Sorting tests — alphabetical and price-based, ascending and descending
+- Checkout flow — Page Objects and E2E tests for the full purchase path
+- Test coverage for additional user types (problem user, visual user behaviors)
+- Parametrized tests across multiple user types
+- Data-driven test scenarios
+- Multi-browser execution (Firefox, WebKit)
+- CI/CD integration via GitHub Actions
