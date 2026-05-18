@@ -49,18 +49,8 @@ def login_page(page: Page):
 
 
 @pytest.fixture
-def authenticated_page(page: Page) -> Page:
+def logged_in_page(page: Page, login_page: LoginPage) -> Page:
     """Returns a products page with standard_user already logged in."""
-    user = UserFactory.standard_user()
-    lp = LoginPage(page)
-    lp.navigate()
-    lp.login(user.username, user.password)
-    return page
-
-
-@pytest.fixture  # czy ten fixture zadziała tak samo jak fixture "authenticated_page ? który jest lepszy?
-def auth_page(page: Page, login_page: LoginPage) -> Page:
-    """Returns a products page with standard_user already logged in (version 2)."""
     user = UserFactory.standard_user()
     login_page.navigate()
     login_page.login(user.username, user.password)
