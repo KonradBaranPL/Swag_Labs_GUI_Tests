@@ -9,6 +9,7 @@ from playwright.sync_api import Page
 import pytest
 
 from data.users import UserFactory
+from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 from utils.config import Config
 
@@ -49,9 +50,9 @@ def login_page(page: Page):
 
 
 @pytest.fixture
-def logged_in_page(page: Page, login_page: LoginPage) -> Page:
+def logged_in_page(page: Page, login_page: LoginPage):
     """Returns a products page with standard_user already logged in."""
     user = UserFactory.standard_user()
     login_page.navigate()
     login_page.login(user.username, user.password)
-    return page
+    return InventoryPage(page)
