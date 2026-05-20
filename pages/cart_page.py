@@ -8,7 +8,7 @@ from pages.base_page import BasePage
 class CartPage(BasePage):
     """class docstring"""
 
-    def __init__(self, page):
+    def __init__(self, page: Page):
         super().__init__(page)
         self.cart_items = page.locator(".cart_item")
         self.item_names = page.locator(".inventory_item_name")
@@ -18,10 +18,10 @@ class CartPage(BasePage):
         self.continue_shopping_button = page.locator("[data-test='continue-shopping']")
     
 
-    def get_item_count(self) -> int:
+    def get_items_count(self) -> int:
         return self.cart_items.count()
 
-    def get_item_names(self) -> list[str]:
+    def get_items_names(self) -> list[str]:
         return self.item_names.all_text_contents()
 
     def remove_item_by_index(self, index: int):
