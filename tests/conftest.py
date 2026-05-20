@@ -55,4 +55,4 @@ def logged_in_page(page: Page, login_page: LoginPage):
     user = UserFactory.standard_user()
     login_page.navigate()
     login_page.login(user.username, user.password)
-    return InventoryPage(page)
+    return page
