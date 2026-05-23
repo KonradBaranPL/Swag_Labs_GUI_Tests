@@ -34,7 +34,7 @@ class InventoryPage(BasePage):
         """Returns the number of products displayed on the inventory page."""
         return self.inventory_items.count()
 
-    def all_product_names(self) -> list[str]:
+    def get_all_product_names(self) -> list[str]:
         """Returns a list of all product names displayed on the inventory page."""
         return self.item_names.all_text_contents()
 
