@@ -55,7 +55,9 @@ class UserFactory:
 
     @staticmethod
     def performance_glitch_user() -> User:
-        """Returns a performance glitch user — the website simulates a slow connection on this account."""
+        """Returns a performance glitch user — the website simulates
+        a slow connection on this account.
+        """
         return User(
             "performance_glitch_user", 
             "secret_sauce", 

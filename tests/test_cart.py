@@ -39,7 +39,7 @@ class TestAddToCart:
 
         # Assert
         assert inventory.get_cart_count() == 3
-    
+
     def test_added_product_is_in_the_cart(self, logged_in_page: Page):
         """Verifies that added product is in the cart after going to the cart page"""
         # Arrange
@@ -56,7 +56,9 @@ class TestAddToCart:
         expect(products_in_cart).to_have_count(1)
 
     def test_add_button_has_changed_to_remove_button(self, logged_in_page: Page):
-        """Verifies that after clicking 'add' button, the button changed to 'remove' button"""
+        """Verifies that after clicking 'add' button,
+        the button changed to 'remove' button
+        """
         # Arrange
         inventory = InventoryPage(logged_in_page)
         expect(inventory.add_buttons.first).to_be_visible()
@@ -73,14 +75,14 @@ class TestRemoveFromCart:
 
     def test_remove_product_from_cart(self, logged_in_page: Page):
         """Verifies that added product can be removed from cart"""
-        # Arrange 
+        # Arrange
         inventory = InventoryPage(logged_in_page)
         inventory.add_product_by_index(0)
         inventory.go_to_cart()
         cart = CartPage(inventory.page)
         assert cart.get_items_count() == 1
 
-        # Act 
+        # Act
         cart.remove_item_by_index(0)
 
         # Assert

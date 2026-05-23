@@ -1,7 +1,14 @@
+"""
+Settings and URLs for the Swag Labs test suite.
+Values can be changed via environment variables.
+"""
+
 import os
 
 
 class Config:
+    """Test settings: URLs, timeouts, browser, and folder paths."""
+
     BASE_URL = os.getenv("BASE_URL", "https://www.saucedemo.com/")
     PRODUCTS_URL = os.getenv("PRODUCTS_URL", "https://www.saucedemo.com/inventory.html")
     CART_URL = os.getenv("CART_URL", "https://www.saucedemo.com/cart.html")

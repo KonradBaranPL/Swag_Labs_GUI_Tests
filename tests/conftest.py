@@ -9,7 +9,6 @@ from playwright.sync_api import Page
 import pytest
 
 from data.users import UserFactory
-from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 from utils.config import Config
 
