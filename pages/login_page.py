@@ -9,6 +9,9 @@ from playwright.sync_api import Page
 
 from pages.base_page import BasePage
 from utils.config import Config
+from utils.logger import setup_logger
+
+logger = setup_logger("pages.login_page")
 
 
 class LoginPage(BasePage):
