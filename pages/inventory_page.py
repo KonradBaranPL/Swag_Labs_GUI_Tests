@@ -9,6 +9,9 @@ performing user interactions.
 from playwright.sync_api import Page
 
 from pages.base_page import BasePage
+from utils.logger import setup_logger
+
+logger = setup_logger("pages.inventory_page")
 
 
 class InventoryPage(BasePage):
@@ -51,10 +54,12 @@ class InventoryPage(BasePage):
 
     def add_product_by_index(self, index: int):
         """Adds a product to the cart by its position index on the page."""
+        logger.info("Adding product to cart at index: %d", index)
         self.add_buttons.nth(index).click()
 
     def add_product_by_name(self, product_name: str):
         """Adds a product to the cart by its name."""
+        logger.info("Adding product to cart: %s", product_name)
         product = product_name.lower().replace(" ", "-")
         self.page.locator(f"[data-test=\"add-to-cart-{product}\"]").click()
 
@@ -64,12 +69,15 @@ class InventoryPage(BasePage):
         Args:
             value (str): Sort option — 'az', 'za', 'lohi', or 'hilo'.
         """
+        logger.info("Sorting products by '%s'", value)
         self.product_sort_dropdown.select_option(value)
 
     def go_to_cart(self):
         """Navigates to the shopping cart page."""
+        logger.info("Navigating to the cart")
         self.cart_link.click()
 
     def open_menu(self):
         """Opens the burger navigation menu."""
+        logger.info("Opening navigation menu")
         self.burger_menu.click()

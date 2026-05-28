@@ -5,7 +5,7 @@ import sys
 
 
 def setup_logger(name: str = "swag_labs", level: str = "INFO") -> logging.Logger:
-    """Creates and configure logger"""
+    """Create and configure logger"""
     logger = logging.getLogger(name)
     numeric_level = getattr(logging, level.upper(), logging.INFO)
 
