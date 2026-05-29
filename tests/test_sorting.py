@@ -15,6 +15,7 @@ class TestSorting:
         """Verifies that sorting by 'az' gives correct order"""
         # Arrange
         inventory = InventoryPage(logged_in_page)
+        inventory.sort_by("za")
 
         # Act
         inventory.sort_by("az")
