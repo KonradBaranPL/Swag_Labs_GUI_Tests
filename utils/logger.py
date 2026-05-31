@@ -16,7 +16,7 @@ def setup_logger(name: str = "swag_labs", level: str = "INFO") -> logging.Logger
         handler.setLevel(logging.DEBUG)
 
         formatter = logging.Formatter(
-            "%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
+            "\n%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
             datefmt="%H:%M:%S",
         )
         handler.setFormatter(formatter)
