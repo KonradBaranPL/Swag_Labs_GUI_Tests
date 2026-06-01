@@ -6,7 +6,7 @@ and navigation menu, along with methods for reading page state and
 performing user interactions.
 """
 
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from pages.base_page import BasePage
 from utils.logger import setup_logger
@@ -33,24 +33,26 @@ class InventoryPage(BasePage):
         self.footer_fb_button = page.locator("[data-test=\"social-facebook\"]")
         self.footer_linkedin_button = page.locator("[data-test=\"social-linkedin\"]")
 
-    def get_product_count(self) -> int:
-        """Returns the number of products displayed on the inventory page."""
-        return self.inventory_items.count()
+    # def get_product_count(self) -> int:
+    #     """Returns the number of products displayed on the inventory page."""
+    #     return self.inventory_items.count()
 
     def get_all_product_names(self) -> list[str]:
         """Returns a list of all product names displayed on the inventory page."""
+        expect(self.item_names).to_have_count(6)
         return self.item_names.all_text_contents()
 
     def get_all_prices(self) -> list[float]:
         """Returns a list of all product prices, with currency symbol stripped."""
+        expect(self.item_names).to_have_count(6)
         texts = self.item_prices.all_text_contents()
         return [float(price.replace("$", "")) for price in texts]
 
-    def get_cart_count(self) -> int:
-        """Returns the number of items in the cart, or 0 if the cart badge is not visible."""
-        if self.cart_badge.is_visible():
-            return int(self.cart_badge.text_content())
-        return 0
+    # def get_cart_count(self) -> int:
+    #     """Returns the number of items in the cart, or 0 if the cart badge is not visible."""
+    #     if self.cart_badge.is_visible():
+    #         return int(self.cart_badge.text_content())
+    #     return 0
 
     def add_product_by_index(self, index: int):
         """Adds a product to the cart by its position index on the page."""
