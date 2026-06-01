@@ -5,7 +5,7 @@ Provides configuration, data, and page object fixtures
 shared across all test modules via conftest.py.
 """
 
-from playwright.sync_api import Page
+from playwright.sync_api import Page, Playwright
 import pytest
 
 from data.users import UserFactory
@@ -14,6 +14,11 @@ from utils.config import Config
 
 
 # --- CONFIGURATION FIXTURES---
+@pytest.fixture(scope="session", autouse=True)
+def configure_playwright_locators(playwright: Playwright):
+    """Configures Playwright to use 'data-test' as the default test ID attribute"""
+    playwright.selectors.set_test_id_attribute("data-test")
+
 @pytest.fixture(autouse=True)
 def setup_page(page: Page):
     """Sets automaticaly timeouts for each test"""
@@ -28,12 +33,10 @@ def standard_user():
     """Returns an instance of User class - standard_user."""
     return UserFactory.standard_user()
 
-
 @pytest.fixture
 def locked_out_user():
     """Returns an instance of User class - locked_out_user."""
     return UserFactory.locked_out_user()
-
 
 @pytest.fixture
 def problem_user():
@@ -46,7 +49,6 @@ def problem_user():
 def login_page(page: Page):
     """Returns an instance of LoginPage class."""
     return LoginPage(page)
-
 
 @pytest.fixture
 def logged_in_page(page: Page, login_page: LoginPage):
