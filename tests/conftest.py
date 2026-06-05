@@ -9,6 +9,8 @@ from playwright.sync_api import Page, Playwright
 import pytest
 
 from data.users import UserFactory
+from pages.cart_page import CartPage
+from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 from utils.config import Config
 
@@ -57,3 +59,12 @@ def logged_in_page(page: Page, login_page: LoginPage):
     login_page.navigate()
     login_page.login(user.username, user.password)
     return page
+
+@pytest.fixture
+def at_checkout(logged_in_page: Page) -> Page:
+    """Returns logged-in user with one product, positioned on checkout step one."""
+    inventory = InventoryPage(logged_in_page)
+    inventory.add_product_by_index(0)
+    inventory.go_to_cart()
+    CartPage(logged_in_page).proceed_to_checkout()
+    return logged_in_page
