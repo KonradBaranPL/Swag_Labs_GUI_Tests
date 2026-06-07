@@ -1,6 +1,7 @@
 venv/
 __pycache__
 .pytest_cache
+reports/
 screenshots/
-test_results/
+test-results/
 .pylintrc
