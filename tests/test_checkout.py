@@ -14,8 +14,8 @@ from utils.config import Config
 
 @pytest.mark.smoke
 @pytest.mark.e2e
-def test_complete_checkout_flow(logged_in_page: Page):
-    """Verifies full E2E flow"""
+def test_complete_checkout_flow_for_logged_in_user(logged_in_page: Page):
+    """Verifies full checkout flow for an already logged-in standard user."""
     # Arrange
     info = CheckoutFactory.valid()
     inventory = InventoryPage(logged_in_page)
