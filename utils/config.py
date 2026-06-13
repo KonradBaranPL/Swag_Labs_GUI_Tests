@@ -12,6 +12,7 @@ class Config:
     BASE_URL = os.getenv("BASE_URL", "https://www.saucedemo.com/")
     PRODUCTS_URL = os.getenv("PRODUCTS_URL", "https://www.saucedemo.com/inventory.html")
     CART_URL = os.getenv("CART_URL", "https://www.saucedemo.com/cart.html")
+    CHECKOUT_COMPLETE_URL = os.getenv("CHECKOUT_COMPLETE_URL", "https://www.saucedemo.com/checkout-complete.html")
 
     FB_URL = os.getenv("FB_URL", "https://www.facebook.com/saucelabs")
     X_URL = os.getenv("X_URL", "https://x.com/saucelabs")

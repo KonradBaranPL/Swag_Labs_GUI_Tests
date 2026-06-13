@@ -9,6 +9,9 @@ from playwright.sync_api import Page
 
 from pages.base_page import BasePage
 from utils.config import Config
+from utils.logger import setup_logger
+
+logger = setup_logger("pages.login_page")
 
 
 class LoginPage(BasePage):
@@ -25,10 +28,12 @@ class LoginPage(BasePage):
 
     def navigate(self):
         """Opens login page in the browser."""
+        logger.info("Opening login page: %s", Config.BASE_URL)
         self.page.goto(Config.BASE_URL)
 
     def login(self, username: str, password: str):
         """Execute login with given username and password."""
+        logger.info("Logging in as: %s", username)
         self.username_input.fill(username)
         self.password_input.fill(password)
         self.login_button.click()

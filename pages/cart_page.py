@@ -21,14 +21,7 @@ class CartPage(BasePage):
         self.remove_buttons = page.locator("button[data-test^='remove']")
         self.checkout_button = page.locator("[data-test='checkout']")
         self.continue_shopping_button = page.locator("[data-test='continue-shopping']")
-
-    def get_items_count(self) -> int:
-        """Returns the number of items currently in the cart."""
-        return self.cart_items.count()
-
-    def get_items_names(self) -> list[str]:
-        """Returns a list of all item names currently in the cart."""
-        return self.item_names.all_text_contents()
+        self.cart_badge = page.locator("[data-test='shopping-cart-badge']")
 
     def remove_item_by_index(self, index: int):
         """Removes an item from the cart by its position index."""
