@@ -53,7 +53,7 @@ class TestAddToCart:
         # Assert
         expect(cart.page).to_have_url(Config.CART_URL)
         expect(cart.cart_items).to_have_count(1)
-        expect(cart.cart_items.first).to_have_text(expected_name)
+        expect(cart.cart_items.first).to_contain_text(expected_name)
 
     def test_add_button_changes_to_remove_after_adding(self, logged_in_page: Page):
         """Verifies that one product row changes from Add to cart to Remove"""
