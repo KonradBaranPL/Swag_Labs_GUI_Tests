@@ -19,11 +19,11 @@ class LoginPage(BasePage):
 
     def __init__(self, page: Page):
         super().__init__(page)
-        self.username_input = page.locator("[data-test=\"username\"]")
-        self.password_input = page.locator("[data-test=\"password\"]")
-        self.login_button = page.locator("[data-test=\"login-button\"]")
-        self.error_message = page.locator("[data-test=\"error\"]")
-        self.error_message_close_button = page.locator("[data-test=\"error-button\"]")
+        self.username_input = page.get_by_test_id("username")
+        self.password_input = page.get_by_test_id("password")
+        self.login_button = page.get_by_test_id("login-button")
+        self.error_message = page.get_by_test_id("error")
+        self.error_message_close_button = page.get_by_test_id("error-button")
         self.logo = page.get_by_text("Swag Labs")
 
     def navigate(self):
