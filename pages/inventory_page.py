@@ -5,6 +5,7 @@ Provides locators for product listings, cart, sorting, footer social links,
 and navigation menu, along with methods for reading page state and
 performing user interactions.
 """
+import re
 
 from playwright.sync_api import Page, expect
 
@@ -19,23 +20,20 @@ class InventoryPage(BasePage):
 
     def __init__(self, page: Page):
         super().__init__(page)
-        self.page_title = page.locator("[data-test=\"title\"]")
-        self.inventory_items = page.locator(".inventory_item")
-        self.cart_badge = page.locator(".shopping_cart_badge")
-        self.cart_link = page.locator("[data-test=\"shopping-cart-link\"]")
-        self.product_sort_dropdown = page.locator("[data-test=\"product-sort-container\"]")
-        self.item_names = page.locator(".inventory_item_name")
-        self.item_prices = page.locator(".inventory_item_price")
-        self.add_buttons = page.locator("button[data-test^=\"add-to-cart\"]")
-        self.remove_buttons = page.locator("button[data-test^=\"remove\"]")
-        self.burger_menu = page.get_by_role("button", name="Open Menu")
-        self.footer_x_button = page.locator("[data-test=\"social-twitter\"]")
-        self.footer_fb_button = page.locator("[data-test=\"social-facebook\"]")
-        self.footer_linkedin_button = page.locator("[data-test=\"social-linkedin\"]")
+        self.page_title = page.get_by_test_id("title")
+        self.inventory_items = page.get_by_test_id("inventory-item")
+        self.cart_badge = page.get_by_test_id("shopping-cart-badge")
+        self.cart_link = page.get_by_test_id("shopping-cart-link")
+        self.product_sort_dropdown = page.get_by_test_id("product-sort-container")
+        self.item_names = page.get_by_test_id("inventory-item-name")
+        self.item_prices = page.get_by_test_id("inventory-item-price")
 
-    # def get_product_count(self) -> int:
-    #     """Returns the number of products displayed on the inventory page."""
-    #     return self.inventory_items.count()
+        self.add_buttons = page.get_by_test_id(re.compile(r"^add-to-cart"))
+        self.remove_buttons = page.get_by_test_id(re.compile(r"^remove"))
+        self.burger_menu = page.get_by_role("button", name="Open Menu")
+        self.footer_x_button = page.get_by_test_id("social-twitter")
+        self.footer_fb_button = page.get_by_test_id("social-facebook")
+        self.footer_linkedin_button = page.get_by_test_id("social-linkedin")
 
     def get_all_product_names(self) -> list[str]:
         """Returns a list of all product names displayed on the inventory page."""
@@ -47,12 +45,6 @@ class InventoryPage(BasePage):
         expect(self.item_names).to_have_count(6)
         texts = self.item_prices.all_text_contents()
         return [float(price.replace("$", "")) for price in texts]
-
-    # def get_cart_count(self) -> int:
-    #     """Returns the number of items in the cart, or 0 if the cart badge is not visible."""
-    #     if self.cart_badge.is_visible():
-    #         return int(self.cart_badge.text_content())
-    #     return 0
 
     def add_product_by_index(self, index: int):
         """Adds a product to the cart by its position index on the page."""

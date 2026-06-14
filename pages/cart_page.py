@@ -15,13 +15,13 @@ class CartPage(BasePage):
 
     def __init__(self, page: Page):
         super().__init__(page)
-        self.cart_items = page.locator(".cart_item")
-        self.item_names = page.locator(".inventory_item_name")
-        self.item_prices = page.locator(".inventory_item_price")
+        self.cart_items = page.get_by_test_id("inventory-item")
+        self.item_names = page.get_by_test_id("inventory-item-name")
+        self.item_prices = page.get_by_test_id("inventory-item-price")
         self.remove_buttons = page.locator("button[data-test^='remove']")
-        self.checkout_button = page.locator("[data-test='checkout']")
-        self.continue_shopping_button = page.locator("[data-test='continue-shopping']")
-        self.cart_badge = page.locator("[data-test='shopping-cart-badge']")
+        self.checkout_button = page.get_by_test_id("checkout")
+        self.continue_shopping_button = page.get_by_test_id("continue-shopping")
+        self.cart_badge = page.get_by_test_id("shopping-cart-badge")
 
     def remove_item_by_index(self, index: int):
         """Removes an item from the cart by its position index."""
