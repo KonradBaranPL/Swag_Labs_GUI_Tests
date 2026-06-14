@@ -14,10 +14,10 @@ class CheckoutStepTwoPage(BasePage):
 
     def __init__(self, page: Page):
         super().__init__(page)
-        self.subtotal_label = page.locator("[data-test=\"subtotal-label\"]")
-        self.tax_label = page.locator("[data-test=\"tax-label\"]")
-        self.total_label = page.locator("[data-test=\"total-label\"]")
-        self.finish_button = page.locator("[data-test=\"finish\"]")
+        self.subtotal_label = page.get_by_test_id("subtotal-label")
+        self.tax_label = page.get_by_test_id("tax-label")
+        self.total_label = page.get_by_test_id("total-label")
+        self.finish_button = page.get_by_test_id("finish")
 
     def get_subtotal(self) -> float:
         """Returns the subtotal value as a float, with currency symbol stripped."""

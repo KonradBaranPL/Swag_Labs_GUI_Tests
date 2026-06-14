@@ -14,12 +14,12 @@ class CheckoutStepOnePage(BasePage):
     """Page object representing the first step of the Swag Labs checkout process."""
     def __init__(self, page: Page):
         super().__init__(page)
-        self.first_name_input = page.locator("[data-test=\"firstName\"]")
-        self.last_name_input = page.locator("[data-test=\"lastName\"]")
-        self.postal_code_input = page.locator("[data-test=\"postalCode\"]")
-        self.continue_button = page.locator("[data-test=\"continue\"]")
-        self.cancel_button = page.locator("[data-test=\"cancel\"]")
-        self.error_message = page.locator("[data-test=\"error\"]")
+        self.first_name_input = page.get_by_test_id("firstName")
+        self.last_name_input = page.get_by_test_id("lastName")
+        self.postal_code_input = page.get_by_test_id("postalCode")
+        self.continue_button = page.get_by_test_id("continue")
+        self.cancel_button = page.get_by_test_id("cancel")
+        self.error_message = page.get_by_test_id("error")
 
     def fill_form(self, first_name: str, last_name: str, postal_code: str):
         """Fills in the checkout form with the provided delivery information."""
